@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.venv/
+calibracion_cartas.json
+calibracion_cartas.csv

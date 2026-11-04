@@ -1,0 +1,91 @@
+{
+  "descripcion": "Banco experimental real capturado en montaje cenital 60x40x40 cm (47 naipes en 8 escenas, cubriendo las 28 clases 1..7 de la baraja española Mas Reynals)",
+  "escenas": [
+    {
+      "archivo": "IMG_7880.jpeg",
+      "cartas": [
+        {"palo": "Oros", "valor": 1},
+        {"palo": "Oros", "valor": 2},
+        {"palo": "Oros", "valor": 3},
+        {"palo": "Oros", "valor": 4},
+        {"palo": "Oros", "valor": 5},
+        {"palo": "Oros", "valor": 6},
+        {"palo": "Oros", "valor": 7}
+      ]
+    },
+    {
+      "archivo": "IMG_7881.jpeg",
+      "cartas": [
+        {"palo": "Espadas", "valor": 1},
+        {"palo": "Espadas", "valor": 7},
+        {"palo": "Espadas", "valor": 6},
+        {"palo": "Espadas", "valor": 5},
+        {"palo": "Espadas", "valor": 3},
+        {"palo": "Espadas", "valor": 2},
+        {"palo": "Espadas", "valor": 4}
+      ]
+    },
+    {
+      "archivo": "IMG_7882.jpeg",
+      "cartas": [
+        {"palo": "Bastos", "valor": 7},
+        {"palo": "Bastos", "valor": 1},
+        {"palo": "Bastos", "valor": 3},
+        {"palo": "Bastos", "valor": 4},
+        {"palo": "Bastos", "valor": 6},
+        {"palo": "Bastos", "valor": 2},
+        {"palo": "Bastos", "valor": 5}
+      ]
+    },
+    {
+      "archivo": "IMG_7885.jpeg",
+      "cartas": []
+    },
+    {
+      "archivo": "IMG_7886.jpeg",
+      "cartas": [
+        {"palo": "Copas", "valor": 1},
+        {"palo": "Copas", "valor": 2},
+        {"palo": "Copas", "valor": 3},
+        {"palo": "Copas", "valor": 4},
+        {"palo": "Copas", "valor": 5},
+        {"palo": "Copas", "valor": 6},
+        {"palo": "Copas", "valor": 7}
+      ]
+    },
+    {
+      "archivo": "IMG_7888.jpeg",
+      "cartas": [
+        {"palo": "Copas", "valor": 1},
+        {"palo": "Espadas", "valor": 2},
+        {"palo": "Oros", "valor": 2},
+        {"palo": "Copas", "valor": 4},
+        {"palo": "Bastos", "valor": 5},
+        {"palo": "Copas", "valor": 6},
+        {"palo": "Oros", "valor": 6}
+      ]
+    },
+    {
+      "archivo": "IMG_7889.jpeg",
+      "cartas": [
+        {"palo": "Copas", "valor": 1},
+        {"palo": "Espadas", "valor": 2},
+        {"palo": "Oros", "valor": 2},
+        {"palo": "Copas", "valor": 4},
+        {"palo": "Copas", "valor": 6},
+        {"palo": "Oros", "valor": 6}
+      ]
+    },
+    {
+      "archivo": "IMG_7890.jpeg",
+      "cartas": [
+        {"palo": "Oros", "valor": 7},
+        {"palo": "Espadas", "valor": 2},
+        {"palo": "Oros", "valor": 2},
+        {"palo": "Bastos", "valor": 4},
+        {"palo": "Copas", "valor": 6},
+        {"palo": "Oros", "valor": 1}
+      ]
+    }
+  ]
+}

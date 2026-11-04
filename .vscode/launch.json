@@ -1,0 +1,29 @@
+﻿{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Ejecutar 2_main.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "$/2_main.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Ejecutar 1-calibrar.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "$/1-calibrar.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        },
+        {
+            "name": "Ejecutar calibrar_tapete.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "$/calibrar_tapete.py",
+            "console": "integratedTerminal",
+            "justMyCode": true
+        }
+    ]
+}

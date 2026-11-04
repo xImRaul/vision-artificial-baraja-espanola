@@ -1,0 +1,41 @@
+{
+  "imagen_origen": "C:\\Users\\raulg\\.gemini\\antigravity\\scratch\\vision-baraja-espanola\\fotos\\IMG_7885.jpeg",
+  "resolucion": [
+    5712,
+    4284
+  ],
+  "verde_bajo": [
+    76,
+    77,
+    26
+  ],
+  "verde_alto": [
+    94,
+    210,
+    255
+  ],
+  "cobertura_pct": 99.77,
+  "estadisticas": {
+    "H": {
+      "min": 33,
+      "max": 92,
+      "mediana": 83.0,
+      "p_inf": 80.0,
+      "p_sup": 90.0
+    },
+    "S": {
+      "min": 14,
+      "max": 249,
+      "mediana": 143.0,
+      "p_inf": 95.0,
+      "p_sup": 192.0
+    },
+    "V": {
+      "min": 19,
+      "max": 255,
+      "mediana": 120.0,
+      "p_inf": 46.0,
+      "p_sup": 246.0
+    }
+  }
+}
