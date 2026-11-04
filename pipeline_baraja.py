@@ -736,14 +736,7 @@ def dibujar_resultados(imagen_bgr, resultado):
             cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 255, 255), 3, cv2.LINE_AA
         )
 
-    cv2.rectangle(frame, (20, 20), (1420, 115), (0, 0, 0), -1)
-    cv2.putText(
-        frame,
-        f"TOTAL: {interp['total_cartas']} cartas | SUMA: {interp['suma_puntos']} pts ({interp['jugada_mano'].split('(')[0].strip()})",
-        (40, 86),
-        cv2.FONT_HERSHEY_SIMPLEX, 1.65, (0, 255, 255), 4, cv2.LINE_AA
-    )
-
+    # (Línea de resumen superior suprimida para mantener la imagen completamente limpia como en el proyecto de referencia)
     return frame
 
 
