@@ -669,13 +669,27 @@ def dibujar_resultados(imagen_bgr, resultado):
       - Contorno exacto de cada carta en verde brillante (0, 255, 0).
       - Línea superior en amarillo (0, 255, 255) con H med y S.
       - Línea inferior en blanco (255, 255, 255) con el nombre de la carta clasificada.
-      - Recuadro superior negro con el resumen total en amarillo.
+    Escala automáticamente el grosor y el tamaño de fuente según la resolución de entrada.
     """
     frame = imagen_bgr.copy()
     h_img, w_img = frame.shape[:2]
 
-    interp = resultado["interpretacion"]
-    rect_total = (20, 20, 1180, 110)
+    escala = max(0.55, min(w_img, h_img) / 3060.0)
+    grosor_cnt = max(2, int(round(escala * 4.3)))
+    grosor_txt = max(1, int(round(escala * 2.1)))
+    off_borde = max(1, int(round(escala * 1.5)))
+    margen_borde = max(10, int(round(14 * escala)))
+    sep_lineas = max(8, int(round(10 * escala)))
+    margen_v = max(6, int(round(9 * escala)))
+
+    def _dibujar_texto(img, txt, pos, color):
+        px, py = pos
+        for dx, dy in ((-off_borde, -off_borde), (off_borde, -off_borde),
+                       (-off_borde, off_borde), (off_borde, off_borde)):
+            cv2.putText(img, txt, (px + dx, py + dy),
+                        cv2.FONT_HERSHEY_SIMPLEX, escala, (0, 0, 0), grosor_txt, cv2.LINE_AA)
+        cv2.putText(img, txt, (px, py),
+                    cv2.FONT_HERSHEY_SIMPLEX, escala, color, grosor_txt, cv2.LINE_AA)
 
     def _solapa(r1, r2):
         return not (r1[2] < r2[0] or r1[0] > r2[2] or r1[3] < r2[1] or r1[1] > r2[3])
@@ -684,6 +698,7 @@ def dibujar_resultados(imagen_bgr, resultado):
         (c["bbox"][0], c["bbox"][1], c["bbox"][0] + c["bbox"][2], c["bbox"][1] + c["bbox"][3])
         for c in resultado["cartas"]
     ]
+    cajas_etiquetas = []
 
     for idx_c, c in enumerate(resultado["cartas"]):
         cnt = c["contorno"]
@@ -691,52 +706,45 @@ def dibujar_resultados(imagen_bgr, resultado):
         feat = c["caracteristicas"]
 
         # Dibujar el contorno real exacto de la carta en verde (igual que donde Martín)
-        cv2.drawContours(frame, [cnt], -1, (0, 255, 0), 6)
-
-        # Alinear la coordenada X con la esquina superior real del contorno cuando la carta está girada
-        pts_cnt = cnt.reshape(-1, 2)
-        pts_arriba = pts_cnt[pts_cnt[:, 1] <= (y + max(35, int(0.08 * h_box)))]
-        x_sup = int(np.min(pts_arriba[:, 0])) if len(pts_arriba) > 0 else x
-        x_txt = max(20, min(w_img - 560, x_sup))
-
-        rc_arriba = (x_txt, y - 80, x_txt + 520, y - 5)
-        choca_arriba = (
-            y < 90
-            or _solapa(rc_arriba, rect_total)
-            or any(_solapa(rc_arriba, cc) for j, cc in enumerate(cajas_cartas) if j != idx_c)
-        )
-
-        if not choca_arriba:
-            y_hue = y - 52
-            y_clase = y - 12
-        else:
-            pts_abajo = pts_cnt[pts_cnt[:, 1] >= (y + h_box - max(35, int(0.08 * h_box)))]
-            x_inf = int(np.min(pts_abajo[:, 0])) if len(pts_abajo) > 0 else x
-            x_txt = max(20, min(w_img - 560, x_inf))
-            y_hue = min(h_img - 60, y + h_box + 44)
-            y_clase = min(h_img - 15, y + h_box + 86)
+        cv2.drawContours(frame, [cnt], -1, (0, 255, 0), grosor_cnt)
 
         texto_hue = f"H med: {feat['hue_mediana']:.1f} S: {feat['saturacion_media']:.0f}"
         texto_clase = f"{c['nombre']}"
+        (w_hue, h_hue), _ = cv2.getTextSize(texto_hue, cv2.FONT_HERSHEY_SIMPLEX, escala, grosor_txt)
+        (w_cls, h_cls), base_cls = cv2.getTextSize(texto_clase, cv2.FONT_HERSHEY_SIMPLEX, escala, grosor_txt)
+        ancho_blk = max(w_hue, w_cls)
 
-        cv2.putText(
-            frame, texto_hue, (x_txt, y_hue),
-            cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 0), 6, cv2.LINE_AA
-        )
-        cv2.putText(
-            frame, texto_hue, (x_txt, y_hue),
-            cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 255, 255), 3, cv2.LINE_AA
-        )
-        cv2.putText(
-            frame, texto_clase, (x_txt, y_clase),
-            cv2.FONT_HERSHEY_SIMPLEX, 1.4, (0, 0, 0), 6, cv2.LINE_AA
-        )
-        cv2.putText(
-            frame, texto_clase, (x_txt, y_clase),
-            cv2.FONT_HERSHEY_SIMPLEX, 1.4, (255, 255, 255), 3, cv2.LINE_AA
+        # Alinear la coordenada X con la esquina superior real del contorno cuando la carta está girada
+        pts_cnt = cnt.reshape(-1, 2)
+        umbral_y_sup = y + max(15, int(0.08 * h_box))
+        pts_arriba = pts_cnt[pts_cnt[:, 1] <= umbral_y_sup]
+        x_sup = int(np.min(pts_arriba[:, 0])) if len(pts_arriba) > 0 else x
+        x_txt = max(margen_borde, min(w_img - ancho_blk - margen_borde, x_sup))
+
+        y_clase = y - margen_v - base_cls // 2
+        y_hue = y_clase - h_cls - sep_lineas
+        rc_arriba = (x_txt, y_hue - h_hue - 4, x_txt + ancho_blk, y - 2)
+
+        choca_arriba = (
+            (y_hue - h_hue) < margen_borde
+            or any(_solapa(rc_arriba, cc) for j, cc in enumerate(cajas_cartas) if j != idx_c)
+            or any(_solapa(rc_arriba, ce) for ce in cajas_etiquetas)
         )
 
-    # (Línea de resumen superior suprimida para mantener la imagen completamente limpia como en el proyecto de referencia)
+        if choca_arriba:
+            umbral_y_inf = y + h_box - max(15, int(0.08 * h_box))
+            pts_abajo = pts_cnt[pts_cnt[:, 1] >= umbral_y_inf]
+            x_inf = int(np.min(pts_abajo[:, 0])) if len(pts_abajo) > 0 else x
+            x_txt = max(margen_borde, min(w_img - ancho_blk - margen_borde, x_inf))
+            y_hue = min(h_img - h_cls - sep_lineas - margen_v - base_cls, y + h_box + margen_v + h_hue)
+            y_clase = min(h_img - margen_v - base_cls, y_hue + sep_lineas + h_cls)
+            cajas_etiquetas.append((x_txt, y_hue - h_hue - 4, x_txt + ancho_blk, y_clase + base_cls + 4))
+        else:
+            cajas_etiquetas.append(rc_arriba)
+
+        _dibujar_texto(frame, texto_hue, (x_txt, y_hue), (0, 255, 255))
+        _dibujar_texto(frame, texto_clase, (x_txt, y_clase), (255, 255, 255))
+
     return frame
 
 
