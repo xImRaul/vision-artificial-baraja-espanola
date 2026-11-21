@@ -708,7 +708,10 @@ def dibujar_resultados(imagen_bgr, resultado):
         # Dibujar el contorno real exacto de la carta en verde (igual que donde Martín)
         cv2.drawContours(frame, [cnt], -1, (0, 255, 0), grosor_cnt)
 
-        texto_hue = f"H med: {feat['hue_mediana']:.1f} S: {feat['saturacion_media']:.0f}"
+        texto_hue = (
+            f"H:{feat['hue_mediana']:.0f} S:{feat['saturacion_media']:.0f} | "
+            f"({c['posicion_cm'][0]:.1f},{c['posicion_cm'][1]:.1f})cm {c['angulo_360_deg']:.0f}deg"
+        )
         texto_clase = f"{c['nombre']}"
         (w_hue, h_hue), _ = cv2.getTextSize(texto_hue, cv2.FONT_HERSHEY_SIMPLEX, escala, grosor_txt)
         (w_cls, h_cls), base_cls = cv2.getTextSize(texto_clase, cv2.FONT_HERSHEY_SIMPLEX, escala, grosor_txt)
