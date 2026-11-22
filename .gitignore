@@ -2,7 +2,6 @@ __pycache__/
 *.pyc
 .venv/
 .vscode/
-memoria_figuras/
 resultados/
 calibracion_cartas.json
 calibracion_cartas.csv
