@@ -1,5 +1,8 @@
 # Sistema Experto de Visión Artificial Clásica — Baraja Española (Reto 07)
 
+**Vídeo Demostrativo (YouTube):** [https://youtu.be/UpGTOjYVCVc](https://youtu.be/UpGTOjYVCVc)
+
+
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/xImRaul/vision-artificial-baraja-espanola/blob/main/examen_google_colab.ipynb)
 
 Proyecto completo para el Examen Parcial de **Visión Artificial Clásica** (Inteligencia Artificial). Analiza automáticamente escenas cenitales reales de cartas físicas de la **baraja española tradicional (Mas Reynals / Royal Casino Opaco Marfil)** para el subconjunto acotado de **28 clases** (valores **1 al 7** de los cuatro palos: **Oros, Copas, Espadas y Bastos**), dispuestas en posiciones y rotaciones arbitrarias ($0^\circ\text{–}360^\circ$) sobre un tapete de fieltro verde mate iluminado cenitalmente dentro de cabina de $60 \times 40 \times 40\text{ cm}$.
