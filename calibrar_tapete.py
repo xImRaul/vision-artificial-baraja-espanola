@@ -53,8 +53,15 @@ def calcular_limites_tapete(hsv):
     inferiores, superiores = [], []
     estadisticas = {}
 
+    # Si la foto elegida contiene cartas encima del tapete, aislar solo los píxeles verdes del fondo
+    mask_verde_previa = (
+        (hsv[:, :, 0] >= 32) & (hsv[:, :, 0] <= 98) & (hsv[:, :, 1] >= 22)
+    )
+    usar_mascara = np.count_nonzero(mask_verde_previa) > (0.25 * hsv[:, :, 0].size)
+
     for idx, (nombre, margen, lim_max) in enumerate(zip(canales, margenes, maximos)):
-        canal = hsv[:, :, idx]
+        canal_full = hsv[:, :, idx]
+        canal = canal_full[mask_verde_previa] if usar_mascara else canal_full.ravel()
         p_inf, p_sup = np.percentile(canal, [PERCENTIL_INFERIOR, PERCENTIL_SUPERIOR])
         inf = max(0, int(np.floor(p_inf)) - margen)
         sup = min(lim_max, int(np.ceil(p_sup)) + margen)

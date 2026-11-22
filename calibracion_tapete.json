@@ -1,5 +1,5 @@
 {
-  "imagen_origen": "fotos/IMG_7885.jpeg",
+  "imagen_origen": "C:\\Users\\raulg\\.gemini\\antigravity\\scratch\\repositorio_github\\fotos\\IMG_7885.jpeg",
   "resolucion": [
     5712,
     4284
@@ -24,7 +24,7 @@
       "p_sup": 90.0
     },
     "S": {
-      "min": 14,
+      "min": 22,
       "max": 249,
       "mediana": 143.0,
       "p_inf": 95.0,
