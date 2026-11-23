@@ -3,7 +3,7 @@ config.py — Parámetros físicos, geométricos y umbrales del Árbol de Decisi
 Reto 07: Visión Artificial Clásica — Baraja Española.
 
 Calibrado experimentalmente sobre el montaje real (caja cenital 60x40x40 cm con
-iluminación flash sobre tapete de fieltro verde mate y naipes españoles Mas Reynals,
+iluminación artificial (iluminación artificial o dos lámparas laterales) sobre tapete de fieltro verde mate y naipes españoles Mas Reynals,
 capturas de 5712x4284 px / 5477x4118 px).
 """
 
@@ -38,7 +38,7 @@ CARTA_RECT_H = 460
 # =============================================================================
 # 3. SEGMENTACIÓN DEL TAPETE VERDE Y SOMBRAS EN HSV (Paso 1 del Pipeline)
 # =============================================================================
-# En captura cenital con flash dentro de caja, el tapete presenta zonas muy
+# En captura cenital con iluminación artificial dentro de caja, el tapete presenta zonas muy
 # iluminadas (S moderada, V alta) y esquinas en penumbra (V baja), mientras que
 # la cartulina blanca del naipe mantiene un perímetro continuo de alta luminancia
 # (V >= 120) y tono fuera del verde del tapete.
