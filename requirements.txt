@@ -1,4 +1,18 @@
+# ============================================================================
+# REQUERIMIENTOS DEL PROGRAMA — BARAJA ESPANOLA (VISION ARTIFICIAL CLASICA)
+# ============================================================================
+# REQUERIMIENTOS DE ESCENA (OBLIGATORIOS PARA LA DETECCION):
+# 1. NO SOLAPAR CARTAS: Las cartas NO pueden estar una encima de otra ni
+#    tocandose entre si. Dejar al menos 1-2 cm de tapete verde entre cartas
+#    (de lo contrario cv2.findContours une sus contornos y no las detecta).
+# 2. CARTAS DENTRO DEL TAPETE: Colocar las cartas boca arriba e integramente
+#    dentro del tapete verde (admiten cualquier giro de 0 a 360 grados).
+# 3. SUBCONJUNTO: 28 cartas (valores del 1 al 7 de Oros, Copas, Espadas, Bastos).
+# 4. ILUMINACION Y CAMARA: Toma cenital (~40 cm) con flash o dos lamparas
+#    laterales, evitando reflejos blancos directos sobre el barniz.
+# (Ver detalle completo en REQUERIMIENTOS_DE_USO_Y_ESCENA.md / .txt)
+# ============================================================================
+
 opencv-python>=4.8.0
 numpy>=1.24.0
 matplotlib>=3.7.0
-python-docx>=1.1.0

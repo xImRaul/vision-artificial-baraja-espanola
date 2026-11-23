@@ -11,6 +11,18 @@ Cumple estrictamente la prohibición de modelos entrenados (**sin Deep Learning,
 
 ---
 
+
+## ⚠️ Requerimientos de Uso y Colocación de las Cartas (Importante)
+
+Para que el sistema clásico detecte y clasifique correctamente todos los naipes:
+1. **Las cartas NO pueden estar una encima de otra (solapadas) ni tocándose:** Debe existir una separación mínima de **1–2 cm de tapete verde** alrededor de cada carta. Si una carta pisa a otra, `cv2.findContours(RETR_EXTERNAL)` fusiona ambas siluetas en un único contorno no rectangular y las descarta.
+2. **Cartas completas y dentro del tapete verde:** Todas las cartas deben estar boca arriba e íntegramente dentro del tapete verde (sin cortarse en los bordes de la foto).
+3. **Posición y rotación libres (`0°–360°`):** Se pueden colocar en cualquier ángulo o invertidas `180°` (la homografía las endereza automáticamente a `300 × 460 px`).
+4. **Subconjunto del reto (28 cartas):** Naipes del **1 (As) al 7** de **Oros, Copas, Espadas y Bastos**.
+5. **Cámara cenital e iluminación:** Fotografía perpendicular al tapete (`~40 cm`), funcionando igual con **flash del móvil o dos lámparas laterales**.
+
+*(Ver documento completo en [`REQUERIMIENTOS_DE_USO_Y_ESCENA.md`](REQUERIMIENTOS_DE_USO_Y_ESCENA.md)).*
+
 ## Resultados Experimentales Verificados (Fotos Reales en `fotos/`)
 
 - **Nivel 1 (Detección y Geometría):** `100.00%` Recall y `100.00%` Precisión (`47 / 47` naipes reales detectados, `0` falsos positivos sobre tapete vacío `IMG_7885.jpeg`, desviación angular residual tras homografía de `0.02°` y escala media de `14.38 px/mm`).
